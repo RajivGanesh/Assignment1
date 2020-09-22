@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Food Logistics Online Procurement version 1 system documentation.">
+        <meta name="author" content="Rajiv Ganesh">
+        <link rel="stylesheet" href="css/navigation-pane.css">
+        <link rel="stylesheet" href="css/master-styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/1d25f5643b.js" crossorigin="anonymous"></script>
+        <title>FLOPv1 - Architectural Representations</title>
+    </head>
+    <body>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="name">FLOPv1</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="toc.html">Table of Contents</a></li>
+                <li><a href="constraints.html">Next Page</a></li>
+                <li><a href="introduction.html">Previous Page</a></li>
+            </ul>
+        </nav>
+        <main>
+            <article id="top">
+                <section id="architecture">
+                    <h2>2 Architectural Representations</h2>
+                        <p>This section of the document describes the system as a set of components, and how they are interconnected as they establish a framework for operation. The architectural views described here are entail logical, process, development, and physical frameworks. Scenarios at the beginning of this sections will describe the sequential behavior of specific system features.</p>
+                </section>
+                <section id="scenarios">
+                    <h2>2.1 Scenarios</h2>
+                    <h2>2.1.1 User Data Entry Flow</h2>
+                        <figure>
+                            <a href="img/a211.png"><img src="img/a211.png" alt="Figure 1"></a>
+                            <figcaption>Figure 1: Data entry flow for all users.</figcaption>
+                        </figure>
+                        <p>This scenario depicts the flow of events for any user entering any form of data. The flow, described per event is defined as:</p>
+                            <ul class="lformat">
+                                <li>1.	Data entered is validated, checking for the proper data type, and format.</li>
+                                <li>2.	The data that has passed all validation checks are entered in to the table</li>
+                                <li>2.1 Invalid data results in an error displayed on the user interface.</li>
+                                <li>3.	If data is successfully entered to a table, the user is informed that a row as been created.</li>
+                            </ul>
+                    <h2>2.1.2 Encrypted Data Entry Flow</h2>
+                        <figure>
+                            <a href="img/a212.png"><img src="img/a212.png" alt="Figure 2"></a>
+                            <figcaption>Figure 2: Encrypted data entry for secure items.</figcaption>
+                        </figure>
+                        <p>This scenario details the flow of events for data items that need to be encrypted before they can be entered in to the database. Encrypting data allows user privacy at the development level. The flow of events is described as:</p>
+                            <ul class="lformat">
+                                <li>1.	Data is checked for its proper data type and format.</li>
+                                <li>2.	The data that has passed all checks can now be reformatted.</li>
+                                <li>2.1	Invalid data results in an error displayed to the user.</li>
+                                <li>3.	Data is passed through a hash filter, and is encrypted.</li>
+                                <li>4.	The database table is updated with the hashed item</li>
+                                <li>5.	The user is informed of a successful row insertion.</li>
+                            </ul>
+                    <h2>2.1.3 Adding an item in to the cart</h2>
+                        <figure>
+                            <a href="img/a213.png"><img src="img/a213.png" alt="Figure 3"></a>
+                            <figcaption>Figure 3: Sequence of events to add an item to a cart.</figcaption>
+                        </figure>
+                        <p>This scenario depicts the flow of events that happen when a user selects a product from the store page, and adds it to their cart. Items are displayed on the store page, but they also have individual item pages which a user accesses upon selection to choose their desired quantity, and calculate their total for that item. The sequence of events is defined as:</p>
+                            <ul class="lformat">
+                                <li>1.	The user’s selection opens up the item’s linked page.</li>
+                                <li>2.	The item’s quantity is specified by the user, and their total is calculated.</li>
+                                <li>3.	Item’s quantity, and total for that user is added to a table alongside their username.</li>
+                                <li>4.	The shopping cart is generated for that user and displayed with their cart total.</li>
+                            </ul>
+                    <h2>2.1.4 Report Generation</h2>
+                        <figure>
+                            <a href="img/a214.png"><img src="img/a214.png" alt="Figure 4"></a>
+                            <figcaption>Figure 4: Events detailing a user generating a report.</figcaption>
+                        </figure>
+                            <p>This scenario depicts the sequence of events that take place when a user chooses to view a report. Oracle offers the added benefit of designing autonomous applications. Reports are constantly being tabulated based off of queries running in the background of the application. The flow of events as depicted in the diagram are:</p>
+                            <ul class="lformat">
+                                <li>1.	User builds submits their own report query, or selects a pre-rendered report.</li>
+                                <li>2.	The database back-end receives the query and builds a report around its parameters.</li>
+                                <li>3.	The report is generated and displayed to the user.</li>
+                            </ul>
+                </section>
+                <section id="logicalview">
+                    <h2>2.2 Logical View</h2>
+                        <figure>
+                            <a href="img/l22.png"><img src="img/l22.png" alt="Figure 5"></a>
+                            <figcaption>Figure 5: Logical view of FLOP v1 cloud application.</figcaption>
+                        </figure>
+                        <p>The logical view of the system shows the infrastructural breakdown of computational, communicational, and behavioral responsibilities. The client-side of the view is on the right with the user’s operating system running a web browser. The user is allowed to communicate through their private network, to a public network (the internet), and through to the application’s privately hosted cloud server which is on a private network.</p>
+                        <p>On the server, Oracle SQL Developer which operates the database, and Oracle APEX which runs the front-end, are installed as two separate application packages. Both platforms are connected to each other via a virtualized local connection on the server. This creates one ubiquitous package environment for both components to simultaneously communicate with each other.</p>
+                </section>
+                <section id="processview">
+                    <h2>2.3 Process View</h2>
+                        <figure>
+                            <a href="img/p23.png"><img src="img/p23.png" alt="Figure 6"></a>
+                            <figcaption>Figure 6:	The process view of the system showing interconnected processes.</figcaption>
+                        </figure>
+                        <p>The process view of the application offers a deeper look inside the infrastructural framework of the system. This view focuses on the aspects of the system’s non-functional requirements, in terms of security, concurrency, constraints, and transaction management. The process view diagram for this package highlights the processes that take place on one concurrent, and successive operational window of the system.</p>
+                        <p>The sequential layout of the processes starts with the user logging in to the system. Users at all security levels are required to log in to access the system. While logging in, the first database transaction takes place. The user’s credentials are validated against the table which stores the user data in the database. Between the processes of requesting access, and validating the credentials, a procedural process starts. This process de-hashes an already hashed copy of the user’s password from the database, and stores it in a temporary variable to validate the incoming password. The user’s company name is also taken from the database table, and stored in a temporary variable, while the incoming user’s company name is capitalized.</p>
+                        <p>The company name (username), and password combo for the user is validated, and then their account credentials are validated against an authentication schema to determine their permissions for the application. The user is brought to their home page, which is generated with the help of the authentication schema, to only show the processes the user can execute. All users interact with the system’s database to some extent, and conduct database transactions to manipulate data, or generate reports. Finally, users can log out from their current session, saving the last state of their account to the database.</p>
+                </section>
+                <section id="developmentview">
+                    <h2>2.4 Development View</h2>
+                        <figure>
+                            <a href="img/d24.png"><img src="img/d24.png" alt="Figure 7"></a>
+                            <figcaption>Figure 7: Abstract development view of FLOP v1, organized by layer.</figcaption>
+                        </figure>
+                        <p>The abstract version of the development view shows how the system is layered. Starting at the database layer at the bottom of the diagram, it is stated clearly that SQL is the foundation of the database, and its processes. Both the database schema, and transactions use SQL based operations in their normal function. The database layer communicates with the persistence layer. The persistence layer contains PL/SQL scripts that are responsible for making sure the data making its way to the database is properly formatted, is the proper type, and satisfies security constraints. The user authentication schema, and encryption scripts are defined at the persistence layer. The presentation layer provides a user interface with forms for data entry by users. These forms are designed used HTML and CSS markup languages. The presentation layer communicates with the persistence layer, and not the database layer directly.</p>
+                        <figure>
+                            <a href="img/d242.png"><img src="img/d242.png" alt="Figure 8"></a>
+                            <figcaption>Figure 8: Components by layers in development view.</figcaption>
+                        </figure>
+                        <p>The components located at each of the layers are shown in figure 8. At the database layer, all the database tables are shown in its schema. At the persistence layer, all the scripts that interact with the data before it reaches the database are shown. Finally, the presentation layer shows the pages of the application that are common to all users. All of the pages are not listed. The persistence layer acts as a buffer between the database, and presentation layers.</p>
+                </section>
+                <section id="physicalview">
+                    <h2>2.5 Physical View</h2>
+                        <figure>
+                            <a href="img/p25.png"><img src="img/p25.png" alt="Figure 9"></a>
+                            <figcaption>Figure 9: Physical system view showing the component relationship by process.</figcaption>
+                        </figure>
+                        <p>The physical view of the system depicts a simplified process view, as it relates to physical system components. The user can access the cloud application from any HTML5 compatible browser, or device. The user’s transactional actions with the application are sent from, and received by the application’s interface accessed on their browser. The server acts as a singular virtualized space where the application exists as on package, instead of two operational components. Different modules of the application in Oracle APEX, and Oracle SQL Developer communicate outside of their native applications, but within the confines of their Oracle package ecosystems to read, and write data across platforms.</p>
+                        <p>Oracle provides features for systems to be made with elements of autonomy as new advances in computing and AI take the forefront of the tech industry. SQL that is native to Oracle has a larger syntax base, and provides more functionality. The server provides a key role in the application’s autonomy by creating a native environment for the two components to openly validate each other’s modules simultaneously.</p>
+                </section>
+            </article>
+        </main>
+        <a class="scrollup" href="#top"><i class="fas fa-angle-double-up fa-1x"></i></a>
+    </body>
+</html>

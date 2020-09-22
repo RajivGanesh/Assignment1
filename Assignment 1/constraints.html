@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Food Logistics Online Procurement version 1 system documentation.">
+        <meta name="author" content="Rajiv Ganesh">
+        <link rel="stylesheet" href="css/navigation-pane.css">
+        <link rel="stylesheet" href="css/master-styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/1d25f5643b.js" crossorigin="anonymous"></script>
+        <title>FLOPv1 - Architectural Goals and Constraints</title>
+    </head>
+    <body>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="name">FLOPv1</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="toc.html">Table of Contents</a></li>
+                <li><a href="size.html">Next Page</a></li>
+                <li><a href="architecture.html">Previous Page</a></li>
+            </ul>
+        </nav>
+        <main>
+            <article class="container" id="top">
+                <section class="constraints" id="constraints">
+                    <h2>3 Architectural Goals and Constraints</h2>
+                        <p>This section of the document provides readers with the knowledge of the constrains on different parts of the system that are placed there by the system requirements. Before reading further in this document, the functional, and non-functional requirements must be apparent to the user, and these are:</p>
+                        <b><p>Functional Requirements:</p></b>
+                        <ul class="lformat">
+                            <li>User login credentials shall be stored in the database.</li>
+                            <li>Hashed payment details shall be stored in the database</li>
+                            <li>Product quantities shall be recorded by the database management system.</li>
+                            <li>Invalid credentials shall issue the user an incremented login timeout of 5 seconds per invalid attempt in a 60 second window. </li>
+                            <li>User passwords shall be hashed through their assignment MD5 algorithm before being stored in the database.</li>
+                            <li>Payment information shall not be de-encrypted by the database.</li>
+                            <li>Payment information shall be hashed through its assigned MD5 algorithm.</li>
+                            <li>Users shall have 24/7 access to the system from external locations.</li>
+                            <li>The system shall record all client sales.</li>
+                            <li>Users shall be able to view reports.</li>
+                        </ul>
+                        <b><p>Non-Functional Requirements:</p></b>
+                        <ul class="lformat">
+                            <li>The system must have adequate storage space available to record user data.</li>
+                            <li>The system security must comply with hashing encryption scripts.</li>
+                            <li>The physical server system must always be powered on.</li>
+                            <li>Users must be able to concurrently access the application.</li>
+                            <li>The application must be readable by devices of all screen sizes.</li>
+                            <li>The system must be usable by any HTML5 compliant browser or device.</li>
+                            <li>The system must not be down more than once in any 24-hour window.</li>
+                        </ul>
+                </section>
+                <section id="serverside">
+                    <h2>3.1 Server Side</h2>
+                        <p>The cloud application is hosted from a cloud server provided, and owned by Oracle. The user does not have to install the application, and it does not use up the local resources available on the user’s system. The server must be robust enough to host multiple client instances to maintain the application’s non-functional requirement of concurrent user access. Users are allocated server resources on a FCFS basis. If the system resources are getting to a point where one server may be overwhelmed, another image of the application will be accessed from a parallel server to facilitate user performance overdrafts.</p>
+                        <p>Storage is also an essential function of the application’s server-side. The cloud application stores data in an oracle DBMS, which requires primary, as well as secondary storage. The user stores no elements of the application on their systems, other than cached versions of the application stored by their browser. The server is held to the constraint of always having adequate space to store user data. It must also have adequate space for caching, as each row of data in the database has a set cache sized of 10MB. This satisfied the system’s non-functional requirement for storage.</p>
+                </section>
+                <section id="clientside">
+                    <h2>3.2 Client Side</h2>
+                        <p>The client side of the application is very light in contrast to the rest of the system. This put’s the responsibility of client-end functionality up to the user in a disproportionate ratio. The constraint placed on the client-side falls to web browser performance. Users must ensure they use an HTML5 compliant browser to be able to properly access all of the application’s functionality, and maintain usable performance. Browsers such as Explorer, Mozilla Firefox, and Google Chrome have been tested in development, and are sufficient enough to run the application maintaining its normal operational benchmarks. This satisfies the non-functional requirement criteria for the application being usable in any HTML5 compliant space.</p>
+                        <p>A goal of the system is for it to be automatically readable by any device of any size viewport. As long as the user’s browser can correctly deliver the required functionality of the application, the application can be read comfortable should the size of the window, or viewport change unexpectedly. The browser being HTML5 compliant is imperative to this constraint, as the media queries in the HTML and CSS code for responsive design are an HTML5 object.</p>
+                </section>
+                <section id="security">
+                    <h2>3.3 Security</h2>
+                        <p>System security is one of the most important aspects of the system, if it is not the most important element. The first layer of security the application offers is user authentication. Users have usernames and passwords as their credentials to log in to the application. The passwords for these users are stored in the same table as the client’s username. However, unlike the rest of the table data, the passwords are not visible in their raw input format view from the user, but they are viewed as a hash.</p>
+                        <p>Before passwords are entered in to the table, they are passed through a PL/SQL hash filter which formats it in MD5 encryption. The encryption filter uses 35 characters that are all randomized, and different. Payment information is also encrypted and passes through a hash filter on its way to being stored in the database. This visibly, and algorithmically protects the data from malicious elements in the development environment.</p>
+                        <p>The system security is also bolstered by a user authorization schema. This is schema that defines the permissions for each user class: Administrators, Commercial users, and Agricultural users. The authentication schema locks, and hides specific content on the application based on the current user’s application privileges. There is an additional attribute to user class permissions, whereas each class of user can be assigned reader, contribution rights, or both as an added layer of flexible security.</p>
+                </section>
+                <section id="persistence">
+                    <h2>3.4 Persistence</h2>
+                        <p>In web development, data is persisted by four methods: temporary data, session state, application state, and data store. Starting with temporary data, or tempdata. This is data that is passed from one subsequent element to another with a very short life-span in its origination. Tempdata is used on the market page with all of the available products listed in the FLOP v1 application. When a user clicks on an item to purchase it, the item’s data is linked to a temporary page that calculates the total cost of the item based off of the quantity the user defines. The total is calculated when the quantity is selected, before the item is stored in the table responsible for keeping track of product orders. While the total, and quantity is on the linked product page, they are both considered tempdata values, because they carry information, and therefore must persist.</p>
+                        <p>Session state data also plays an important role in the market section of the application. After the total, and quantity has been established, the two tempdata items will not be inserted into a table to maintain data integrity. However, moving the items to a table requires the state ID of the current ongoing user session. The application allows for the resources of the current user’s session to be stored on temporarily on disk. Using the PL/SQL command ‘&APP_USER.’, the session’s state ID will be replaced by the current user’s username because it is equivalently unique to that specific user. Both session data, and tempdata items have made it into the database at this point.</p>
+                        <p>Application session state is determined by data stored in the database tables. The FLOP v1 application is always live, and users always access a present version of the application. The current state of the application is always generated when a user accesses the platform. The relevant pages, such as the market page will always pull the current data directly from the ‘OrderSell’ table in the database, so that all the relevant items are displayed to the user. Once a day, a database backup is performed by Oracle for all the applications on their servers. This backup preserves the current application session state on a daily basis. Data store ties in to this, as it was covered in the first section 3 item: 3.1 Server-side. Data store is imperative to these previously mentioned persistence methods.</p>
+                        <p>The system must always have enough space to make sure that all items have been permanently stored in the database, and will be preferably be archived to be removed, instead of being deleted to further add to data security.</p>
+                </section>
+                <section id="reliability">
+                    <h2>3.5 Reliability / Availability</h2>
+                        <p>The whole application is run from a cloud server, which identifies it as a cloud application. Users must be able to access the application 24/7, and therefore there are explicit bandwidth and hardware constraints imposed on the system. Since the system is hosted there is a downtime window that is not decided by the application’s developers. The downtime is set by Oracle and is relegated to one day per week during the night. This satisfied the non-functional requirement of not having more than one outage in any given 24-hour window.</p>
+                        <p>Hosting a cloud application comes with the implicit constraint of network availability. If the user does not have access to an internet connection, they can’t access the platform, but we aren’t accountable for that variable. However, if our internet connection is down, or our bandwidth is throttled back to where it’s no longer usable, then we are accountable for it. Oracle provides unlimited bandwidth for users. There is a catch however, because users are not expected to use up more than their fair share of bandwidth, a bandwidth cap is placed on a per application basis. If an application’s allocated bandwidth cap is reached, the unlimited connectivity is still there, however the application’s network performance is reduced.</p>
+                </section>
+                <section id="performance">
+                    <h2>3.6 Performance</h2>
+                        <p>The FLOP v1 application is a live platform where data is constantly changing, and therefore a criterion for judgement for all live applications is justified to be predictability. There is an element of high predictability in the system, as the persistence layer of the application has PL/SQL scripts constantly running as background processes simultaneously checking data as it is entered in to the system. Predictability in this system, therefore has to do deal with reliability. Reliability prediction can be a problem worsened when there exists data in a system that is not precise for modelling.</p>
+                        <p>This application tends to have high reliability prediction because of the normalization that was done before the database schema was introduced digitally. An example of precise data, is in the referencing of common data attributes within the system. For instance, an administrator, commercial, and agricultural user all share common attributes such as a first name, and a last name. Different tables can be made for each of these users, with first, and last name columns. However, since it is a common attribute, the three tables can be combined int to one table named ‘usercred’, then have other the other tables reference the data from that singular point. The more precise the source of data is, the higher predictability in live systems.</p>
+                        <p>Another example can be the market page in the application which generates items from the ‘usercred’ table in the database. The ‘usercred’ table stores the type of an item that has to be read by the page every time it loads. To prevent the page from reading largely different data every time it loads, the type of produce is linked to an existing produce table, where an already existing pool of data is cached for easy retrieval. Therefore, creating data models with high predictability.</p>
+                </section>
+                <section id="portability">
+                    <h2>3.7 Portability and Reuse</h2>
+                        <p>Data portability carries with it the element of interoperability. System interoperability might be a moot variable of this system, as is it is hosted on a singular platform to be ubiquitously accessed by a stream of other platforms. The application can be used by any system, because it does not require any exterior resources but its own shell. The only element of interoperability considered in this system, are the physical hardware constraints to view the application, because it is essentially streamed to users. Another point of portability this system does not cater for, is data portability, which gives users the right to get back the personal data they’ve given to a controller, but this system uses no controller, and does not rely on user behavioral analytics.</p>
+                        <p>No components in this application were off the shelf components that were reused and repurposed in development. However, components in this application were sometimes used to created other components that required nearly the same functionality. An example of this is the encryption, and hashing scripts used to handle passwords and payment information. The password hashing algorithm was developed first using a unique salt filter for encrypting passwords. Then the script was altered to remove formatting commands that would automatically capitalize the password string, and reworked to accept payment information in the form of credit card numbers. The hashing filter was changed on the script for payment information to include a different combination of the 35-character string used for passwords.</p>
+                        <p>For future developments in the application, as the system grows component reuse becomes far more prevalent, and efficient in terms of expansion.</p>
+                </section>
+                <section id="development">
+                    <h2>3.8 Development Tools</h2>
+                        <p>The system was built as two separate components before being combined in to one complete package. The database was developed in Oracle SQL Developer using Oracle SQL as the operative programming language. The database schema was made as one SQL document, then uploaded to SQL Developer for testing and debugging. Alterations were made by using the SQL command option of the IDE, and were not included in the original schema to be regenerated every time an alteration was made.</p>
+                        <p>The front-end of the application was built in Oracle APEX using HTML and CSS markup languages. APEX was chosen for its ability to make processes autonomous, and because of it’s very visual reporting options. APEX also makes writing procedures easier through the use of PL/SQL where functional scripting is involved. Only Oracle developer tools were used. The use of JavaScript is permitted in Oracle APEX; however, it was deemed not necessary in this project as all the tables were normalized to a degree where all data maintained a high sense of referential integrity, and therefore all operations were procedural, and not behavioral. </p>
+                </section>
+                <section id="schedule">
+                    <h2>3.9 Schedule</h2>
+                        <p>In the development of this application, the database had to be designed before any other component was developed. Designing, developing, and testing the database required the most time in the development process. This was because the tables were being normalized after each new schema iteration. Normalizing tables took long because the developer would need to abstractly create every query with each normalized version of the schema to see if the query statement, and returned data stayed true to its original form.</p>
+                        <p>Development of the user interface took half the time of the database development time. This was because the user interface was done as a framework markup of the original database. The user interface was connected to the database by creating each form, and each field individually, then routing them to their specified table or data source. User interface development also took less time because APEX allows for autonomy. One page was designed with a specific layout for each of the modules in the DBMS package. Following modules were able to automatically render themselves using the specified design layout from previously implemented modules. This saved time and was more efficient than individually designing each page.</p>
+                </section>
+            </article>
+        </main>
+        <a class="scrollup" href="#top"><i class="fas fa-angle-double-up fa-1x"></i></a>
+    </body>
+</html>

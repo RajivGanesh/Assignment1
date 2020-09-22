@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Food Logistics Online Procurement version 1 system documentation.">
+        <meta name="author" content="Rajiv Ganesh">
+        <link rel="stylesheet" href="css/navigation-pane.css">
+        <link rel="stylesheet" href="css/master-styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/1d25f5643b.js" crossorigin="anonymous"></script>
+        <title>FLOPv1 - Size and Performance</title>
+    </head>
+    <body>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="name">FLOPv1</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="toc.html">Table of Contents</a></li>
+                <li><a href="quality.html">Next Page</a></li>
+                <li><a href="constraints.html">Previous Page</a></li>
+            </ul>
+        </nav>
+        <main>
+            <article id="top">
+                <section id="size">
+                    <h2>4 Size and Performance</h2>
+                        <p>This part of the document references the sizing and timing requirements in the FLOP v1 cloud application. The system can support up to 4000 users simultaneously with the current workspace package it is implemented with on Oracle’s servers. Oracle offers unlimited bandwidth with a throttle at a certain cap, which means that the average interaction latency is very low. This means that the system should not take more than 30 seconds to complete any task that users at any level of the hierarchy may assign.</p>
+                        <p>Disk space is shared among the clients, because they are all operating on a single data source. The database tables are compressed daily, giving an average table size of 2 kilobytes per 20 records without blob elements. System RAM is also shared among the users, but Oracle servers offer virtualization of unused disk space that augment gaps in cache demand. Having the database normalized to 3NF results in better performance, and a better data storage economy.</p>
+                        <p>In the database currently, there is an automated sequence that generates user ID’s and keeps track of them so that it is easier know the database’s data storage limits. Currently the sequence caps the number of users that can be registered at one million accounts. In the pool of the one million users, the sequence also constrains half a million of these users to be commercial users, and the other half to be agricultural users. This can be re-balanced at anytime by editing the script. All the tables in the database are capped to accept a million records, with the exception of the OrderSell, and OrderBuy tables which have their capacity increased to two million records.</p>
+                        <p>As stated before in the system requirements portion of the document, the system downtime is very miniscule, as it can never be down more than once in a 24 hour period, and it has scheduled maintenance on Friday nights outside of peak time. The application is live 24/7 and can be accessed from anywhere, with the only limit being the user’s browser, and bandwidth. </p>
+                </section>
+            </article>
+        </main>
+        <a class="scrollup" href="#top"><i class="fas fa-angle-double-up fa-1x"></i></a>
+    </body>
+</html>

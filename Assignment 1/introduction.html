@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Food Logistics Online Procurement version 1 system documentation.">
+        <meta name="author" content="Rajiv Ganesh">
+        <link rel="stylesheet" href="css/navigation-pane.css">
+        <link rel="stylesheet" href="css/master-styles.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Open+Sans:wght@700&family=Roboto:wght@700&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/1d25f5643b.js" crossorigin="anonymous"></script>
+        <title>FLOPv1 - Introduction</title>
+    </head>
+    <body>
+        <nav>
+            <input type="checkbox" id="check">
+            <label for="check" class="checkbtn">
+                <i class="fas fa-bars"></i>
+            </label>
+            <label class="name">FLOPv1</label>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="toc.html">Table of Contents</a></li>
+                <li><a href="architecture.html">Next Page</a></li>
+                <li><a href="toc.html">Previous Page</a></li>
+            </ul>
+        </nav>
+        <main>
+            <article id="top">
+                <section id="introduction">
+                    <h2>1 Introduction</h2>
+                        <p>This document provides an architectural description of Food Logistics’ Online Procurement cloud application. This document will discuss the platform’s purpose, architectural schema, architectural constraints, processes, and uses. The intended audience for this document is for technical development personnel, but the language used is simple enough for all stakeholders involved to understand the system’s operation.</p>
+                </section>
+                <section id="purpose">
+                    <h2>1.1 Purpose</h2>
+                        <p>This initial purpose of the cloud application is to provide a medium for the agricultural sector to directly access existing markets, overstepping other physical commercial means of acquiring natural produce. It aims to make raw produce accessible to local industries, such as restaurants, and food processing industries. This helps to mitigate the problem of food waste in times of social, political, and economic uncertainty. It would also help reduce the economic backlash of an increasing food import bill, by applying a new platform to derive new logistics with regard to the movement of fresh produce within a country.</p>
+                </section>
+                <section id="scope">
+                    <h2>1.2 Scope</h2>
+                    <p>This project aims to develop Food Logistics’ cloud platform to enable farmers, and other commercial entities to directly enter trade with each other, eliminating the middle-man. A database, and a front-end application will be developed to complete the application package being deployed. Both components of the application will be developed in such a way, that when they are linked together, the completed package has autonomous qualities. This project was initiated to augment the deficiencies of existing physical markets, and provide an alternative method of trade.</p>
+                </section>
+                <section id="definitions">
+                    <h2>1.3 Definitions, Acronyms, and Abbreviations</h2>
+                        <p>In this document, there will be technical terminology and words that will be used in a descriptive capacity, being used frequently, and may be abbreviated or used as an acronym. Reference those words in this section.</p>
+                        <dl>
+                            <dt>DBMS</dt>
+                            <dd>Database Management System</dd>
+                            <dt>SQL</dt>
+                            <dd>Structured Query Language</dd>
+                            <dt>PL/SQL</dt>
+                            <dd>Procedural Language for SQL</dd>
+                            <dt>APEX</dt>
+                            <dd>Application Express</dd>
+                            <dt>FLOP</dt>
+                            <dd>Food Logistics Online Procurement</dd>
+                            <dt>HTML</dt>
+                            <dd>Hypertext Markup Language</dd>
+                            <dt>CSS</dt>
+                            <dd>Cascading Stylesheets</dd>
+                            <dt>3NF</dt>
+                            <dd>3rd Normal Form</dd>
+                            <dt>FCFS</dt>
+                            <dd>First Come, First Served</dd>
+                        </dl>
+                </section>
+                <section id="overview">
+                    <h2>1.4 Overview</h2>
+                        <p>The system combines a database, and a front-end module to create a packaged cloud application. Both components will be developed on two different Oracle platforms to maintain a native ecosystem that allows for them to communicate seamlessly. Using the same environment for both components help with the quality of outputs from critical modules. The database will be designed by a schema made up of eight tables. These tables will be generated using Oracle SQL, in the Oracle SQL Developer environment. The tables in the database are responsible for structing data for user credentials, produce items, product listings, payment information, and management of user procurements. The database schema will be normalized to 3NF to minimize transitive dependencies, which strengthens and enforces referential integrity throughout the database.</p>
+                        <p>The front-end application which will be in constant communication with the database, will be developed using HTML, and CSS using Oracle’s APEX environment. While the database maintains the referential integrity of its objects, APEX’s user interface will provide the first layer of data validation that allows the database to build stronger formal relationships. APEX also provides a persistence layer that keeps data formats consistent as they are inserted in to the database.</p>
+                        <p>The application is to be operated by three classes of users namely, administrators, agricultural clients, and commercial users. The front-end of the application provides users with user friendly interfaces for buying, selling, and viewing products. Product, and user item totals will be automatically calculated by ongoing scripts running in the background of the user interface. There will also be pages for viewing analytical reports based off of the current data in the application. The reports are generated autonomously, and are constantly being restructured by ongoing queries on the back-end.</p>
+                        <p>This document is organized to explain the application’s infrastructure by use of architectural representations such as logical, process, physical, and development views. User scenarios will also be used to explain the processes that occur behind user interactions. The application’s architectural goals and constraints will be discussed by describing the software requirements involved, and the design constraints that will be applied. Use cases will be used to further explain the application’s functionality, as it leans more towards general use and the non-functional requirements of the system. Views of processes will also be provided in the latter half of this document which contain sequence, and activity diagrams for various user processes. The SQL implementation, and relational data items are justified last.</p>
+                </section>
+            </article>
+        </main>
+        <a class="scrollup" href="#top"><i class="fas fa-angle-double-up fa-1x"></i></a>
+    </body>
+</html>

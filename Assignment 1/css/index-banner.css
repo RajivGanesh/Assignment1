@@ -1,0 +1,90 @@
+.img-container {
+    background-image: url(../img/bg.png);
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: fixed;
+    top: 4em;
+}
+
+.inner-container {
+    text-align: center;
+    position: relative;
+    width: 100%;
+    color: #ffffff;
+    height: auto;
+    margin-top: 15em;
+}
+
+.banner-title {
+    font-size: 7em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.banner-description {
+    margin-top: -0.85em;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.7em;
+    text-align: center;
+    font-weight: 400;
+}
+
+.inner-container a{
+    margin-top: 1em;
+    font-size: 1.3em;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.banner-btn {
+    display: inline-block;
+    width: 10em;
+    font-weight: bold;
+    padding: 0.5em;
+    color: #ffffff;
+    border: 0.2em solid #ffffff;
+    text-align: center;
+    outline: none;
+    text-decoration: none;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
+}
+
+.banner-btn:hover,.btn:active {
+    background-color: #ffffff;
+    color: #52BF04;
+    transition: background-color 0.3s ease-in, color 0.3s ease-in;
+}
+
+@media only screen and (max-width: 920px){
+
+    .img-container {
+        top: 3em;
+    }
+
+    .inner-container {
+        margin-top: 15em;
+    }
+
+}
+
+@media only screen and (max-width: 645px){
+
+    .img-container {
+        top: 3em;
+    }
+
+    .inner-container {
+        margin-top: 15em;
+    }
+
+    .banner-title {
+        font-size: 5em;
+        margin: 0 auto;
+    }
+
+    .banner-description {
+        font-size: 1.2em;
+    }
+
+}
