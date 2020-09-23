@@ -28,11 +28,18 @@ main {
 body {
     font-size: 20px;
     font-family:'Open Sans', sans-serif;
+    height: 100%;
+    position: relative;
+}
+
+main {
+    position: relative;
+    min-height: 100vh;
 }
 
 article {
     position: relative;
-    padding-top: 5em;
+    padding-top: 8em;
     font-family: 'Lora', serif;
     font-size: 0.75em;
     margin: 0em 30em 2em;
@@ -106,7 +113,7 @@ figcaption{
 }
 
 .references {
-    padding-top: 8em;
+    padding-top: 11em;
 }
 
 .references ul li {
@@ -119,6 +126,21 @@ figcaption{
     display: none;
 }
 
+
+footer {
+    height: 4em;
+    width: 100%;
+    background-color: #9AD93D;
+    position: relative;
+    bottom: 0;
+}
+
+footer p {
+    color: #ffffff;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 4;
+}
 /* table of contents */
 
 .wrap {
@@ -130,7 +152,7 @@ figcaption{
 }
 
 .toc-content {
-    padding-top: 8em;
+    padding-top: 7em;
 }
 
 .card {
@@ -165,6 +187,10 @@ figcaption{
     color: #000000;
 }
 
+.card a:hover {
+    color: #74A32E;
+}
+
 @media only screen and (max-width: 1640px) {
     article {
         margin: 0em 15em 2em;
@@ -177,8 +203,12 @@ figcaption{
         font-size: 1em;
     }
 
+    section {
+        margin: 0 auto 3em;
+    }
+
     .toc-content {
-        padding-top: 8em;
+        padding-top: 5em;
         margin: 0 2em;
     }
 
@@ -196,6 +226,7 @@ figcaption{
         font-size: 1em;
         border-radius: 50%;
         display: block;
+        z-index: 3;
     }
 }
 
@@ -231,6 +262,11 @@ figcaption{
         margin: 3em 1em;
         list-style-type: none;
         line-height: 2;
+    }
+
+    footer p {
+        font-size: 0.8em;
+        line-height: 4;
     }
 
 }
