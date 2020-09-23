@@ -10,7 +10,7 @@ label.name {
     color: #ffffff;
     font-size: 1.75em;
     line-height: 2.35em;
-    padding: 0 5em;
+    padding: 0 0 0 5em;
     font-weight: bold;
 }
 
@@ -39,7 +39,15 @@ nav ul li a.active, nav ul li a:hover {
     transition: 0.5s;
 }
 
-.checkbtn {
+nav ul li a.inactive {
+    color: #666666;
+}
+
+nav ul li a.inactive:hover {
+    background: #d4d4d4;
+}
+
+.checkbtn, .scheckbtn {
     font-size: 1.5em;
     color: #ffffff;
     float: right;
@@ -50,16 +58,53 @@ nav ul li a.active, nav ul li a:hover {
 
 #check {
     display: none;
+
 }
 
-@media (max-width: 1150px) {
+#checks {
+    display: none;
+}
 
-/* navigation */
+/* lower nav */
+
+.submenu {
+    margin-top: 4em;
+    background: #78A82F;
+    height: 3em;
+}
+
+.submenu ul {
+    float: none;
+    display: block;
+    margin: 0 10em;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.submenu ul li {
+    margin: 0 auto;
+    line-height: 3;
+}
+
+.submenu ul li a.active, .submenu ul li a:hover {
+   background: #9AD93D;
+   transition: 0.5s;
+}
+
+@media (max-width: 1750px) {
+    label.name {
+        font-size: 1.5em;
+        padding-left: 1em;
+        line-height: 2.6em;
+    }
+}
+
+@media (max-width: 1400px) {
 
     label.name {
-        font-size: 1.1em;
+        font-size: 1.4em;
         padding-left: 1em;
-        line-height: 3.8em;
+        line-height: 2.6em;
     }
 
     .checkbtn {
@@ -67,30 +112,30 @@ nav ul li a.active, nav ul li a:hover {
         margin-right: 1em;
     }
 
-    nav ul {
+    .mainnav ul {
         position: fixed;
         width: 100%;
         height: 100vh;
         background: #000000;
+        padding-top: 2em;
         top: 4em;
         left: -100%;
         text-align: center;
         opacity: 80%;
         transition: all 0.5s;
-
     }
 
-    nav ul li {
+    .mainnav ul li {
         display: block;
         margin: 2.5em 0;
         line-height: 1.5;
     }
 
-    nav ul li a {
+    .mainnav ul li a {
         font-size: 1em;
     }
 
-    nav ul li a:hover, nav ul li a.active {
+    .mainnav ul li a:hover, .mainnav ul li a.active, .mainnav ul li a.inactive {
         background: none;
         color: #52BF04;
     }
@@ -99,4 +144,64 @@ nav ul li a.active, nav ul li a:hover {
         left: 0;
     }
 
+    .submenu ul {
+        margin: 0 5em;
+    }
+}
+
+@media (max-width: 920px) {
+    .submenu ul {
+        margin: 0 1em;
+    }
+}
+
+@media (max-width: 752px) {
+    .submenu ul {
+        margin: 0;
+        position: fixed;
+        width: 100%;
+        height: 100vh;
+        background: #000000;
+        top: 7.75em;
+        right: -100%;
+        text-align: center;
+        opacity: 80%;
+        transition: all 0.5s;
+    }
+
+    .submenu ul li {
+        display: block;
+        margin: 2.5em 0;
+        line-height: 1.5;
+    }
+
+    .submenu ul li a {
+        font-size: 1em;
+    }
+
+    .submenu ul li a:hover, .submenu ul li a.active {
+        background: none;
+        color: #52BF04;
+    }
+
+    .scheckbtn {
+        display: block;
+        margin-right: 1.7em;
+        font-size: 1em;
+        line-height: 3em;
+    }
+
+    #checks:checked ~ ul {
+        right: 0;
+    }
+
+
+}
+
+@media (max-width: 700px) {
+    label.name {
+        font-size: 0.9em;
+        padding-left: 1em;
+        line-height: 4.3em;
+    }
 }
